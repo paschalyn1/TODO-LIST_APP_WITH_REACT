@@ -7,7 +7,6 @@ li {
   background: #f1f1f1;
   list-style: none;
   display: flex;
-  /* text-align: center; */
   justify-content: space-between;
   align-items: center;
   color: rgb(8, 8, 8);
@@ -16,8 +15,6 @@ li {
 
 ul button {
   padding: 10px;
-  /* margin-left: 100px; */
-  /* position: absolute; */
   border: none;
   opacity: 0.1;
   color: #f1f1f1;
@@ -75,15 +72,8 @@ span {
   text-align: left;
 }
 
-span:nth-child(2) {
-  text-align: center;
-}
-
 .li {
   display: block;
   justify-content: center;
   align-items: center;
-}
-#getTime {
-  color: blue;
 }

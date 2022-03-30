@@ -1,18 +1,21 @@
 import "./styles.css";
 import Todo from "./todo.js";
 import React, { Component } from "react";
-// import { render } from "react-dom";
+import { render } from "react-dom";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.state = JSON.parse(window.localStorage.getItem("state")) || {
       newItem: "",
       list: []
     };
   }
-
+  setState(state) {
+    window.localStorage.setItem("state", JSON.stringify(state));
+    super.setState(state);
+  }
   updateInput(e) {
     this.setState({
       newItem: e.target.value
@@ -26,12 +29,11 @@ class App extends Component {
     }
     const newItem = {
       id: Date.now(),
-      value: this.state.newItem.slice() + " " + time()
+      value: this.state.newItem.slice() + " -------- time:(" + time()
     };
 
     if (this.state.newItem === "") {
       alert("You cannot enter an empty todo item!");
-      // document.write("You cannot enter an empty todo item!");
     } else {
       const list = [...this.state.list];
 
@@ -41,7 +43,6 @@ class App extends Component {
         list,
         newItem: ""
       });
-      // list.concat(Date())
     }
   }
 
@@ -49,7 +50,6 @@ class App extends Component {
     if (e.code === "Enter") {
       this.addItem();
     }
-    //  console.log(e.code);
   }
 
   deleteItem(id) {
@@ -80,22 +80,11 @@ class App extends Component {
           <button onClick={() => this.addItem()}>Add Task</button>
           <br />
           <ul>
-            {/* {this.state.list.map((item) => {
-              return (
-                <li key={item.id}>
-                  {/* {item.value + Date()} /}
-                  <button onClick={() => this.deleteItem(item.id)}>
-                    Delete
-                  </button>
-                </li>
-              );
-            })} */}
             {this.state.list.map((item, list) => {
               return (
                 <Todo
                   key={item.id}
                   item={item.value}
-                  // time={Date()}
                   deleteItem={() => this.deleteItem(item.id)}
                 />
               );
